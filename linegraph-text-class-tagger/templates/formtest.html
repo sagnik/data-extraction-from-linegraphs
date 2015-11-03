@@ -1,0 +1,11 @@
+$def with (form,desc)
+
+<form name="main" method="post"> 
+<div align="center">
+<img src="/static/temp.png">
+$if not form.valid: <p class="error">Try again, AmeriCAN:</p>
+$:form.render()
+<p class="desc">$desc </p>
+<input type="submit" />    
+</div>
+</form>

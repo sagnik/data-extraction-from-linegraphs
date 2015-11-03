@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Test Input</title>
+<script src="static/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submitbutton").click(function () {
+	//alert( $('textarea#inputbox').val());
+	var mytext= $('textarea#inputbox').val();
+        $.ajax({
+	    //alert("hello");
+            type: "POST",
+            url: "http://localhost:8000/process",
+	    data: {"mytext": mytext},
+	    crossDomain : true,
+	    /*
+            data: JSON.stringify([{'account_template': {
+                    'external_id': 'l10n_harec.a' + $("input[id$=Text2]").val(),
+                    'name': $("input[id$=Text1]").val(),
+                    'code': $("input[id$=Text2]").val(),
+                    'type': $("select[id$=accountType]").val(),
+                    'reconcile': $("input[id$=Checkbox1]").val()
+                }, 'account_account': {
+                    'code': $("input[id$=Text2]").val(),
+                    'name': $("input[id$=Text1]").val(),
+                    'type': $("select[id$=accountType]").val(),
+                    'active': 'True',
+                    'reconcile': $("input[id$=Checkbox1]").val()
+                }
+            }]),
+		
+            dataType: "json",
+	    */
+        });
+    });
+});
+</script>
+</head>
+<body>
+<form id="myform" action="/echo/json/" method="post">
+<p>Enter something in the box: </p>
+<textarea id="inputbox"></textarea>
+<INPUT TYPE="button" name="button" id="submitbutton" Value="Send" >
+</FORM>
+</BODY>
+</HTML>

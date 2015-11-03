@@ -1,0 +1,34 @@
+errors=[]
+for f in fs:
+	c=open(f).read().split("\n")[:-1]
+	for index,line in enumerate(c):
+		label=int(line.split(";")[1])
+		strbox=line.split(";")[0]
+		b=[int(x) for x in strbox.split(",")]
+		if (b[2]-b[0])!=0 and (b[3]-b[1])!=0:
+			asp=(b[3]-b[1])/(b[2]-b[0])
+		else:
+			errors.append((f,index,line))
+			continue
+		if label==1:
+			positives.append(asp)
+			nopositives+=1
+		else:
+			negatives.append(asp)
+			nonegatives+=1
+	print f 
+
+import random
+import numpy as np
+from matplotlib import pyplot
+
+x = positives
+y = negatives
+
+bins = np.linspace(min(np.percentile(x,25),np.percentile(x,75)), max(np.percentile(x,75),np.percentile(x,75)), 100)
+
+pyplot.hist(x, bins, alpha=0.5, label='text')
+pyplot.hist(y, bins, alpha=0.5, label='non text')
+pyplot.legend(loc='upper right')
+pyplot.show()
+

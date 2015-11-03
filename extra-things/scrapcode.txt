@@ -1,0 +1,277 @@
+import matplotlib.pyplot as plt
+plt.plot(range(0,len(sortedcolordict)), [x[1] for x in sortedcolordict], 'ro')
+plt.axis([0, len(sortedcolordict), np.min([x[1] for x in sortedcolordict]),np.max([x[1] for x in sortedcolordict])])
+plt.show()
+
+show_img(x)
+print "hello"
+
+
+data=np.zeros((600,1000,3)).astype(int)
+
+
+for index,item in enumerate(colors[0:50]):
+ color=[int(x) for x in item.split(',')]
+ print color
+ data[0:200,index*20:(index+1)*20]=color
+
+for index,item in enumerate(colors[50:100]):
+ color=[int(x) for x in item.split(',')]
+ print color
+ data[200:400,index*20:(index+1)*20]=color
+
+for index,item in enumerate(colors[100:150]):
+ color=[int(x) for x in item.split(',')]
+ print color
+ data[400:600,index*20:(index+1)*20]=color
+
+im = Image.fromarray(np.uint8(data))
+im.show()
+
+show_img(data)
+
+convert 10.1.1.92.1669-Figure-4-mod.png -separate -threshold 50% -combine 10.1.1.92.1669-Figure-4-threshold.png
+
+for file in *.png
+do
+ echo $file
+ convert $file -separate -threshold 50% -combine thresholding/${file:0:${#file}-4}-threshold.png;
+done
+
+for file in *.png
+do
+ display $file &
+ display colormap/${file:0:${#file}-4}-colormap.png &
+ read response
+ if [[ "$response" == "n" ]];
+  then
+  cp $file colormap/possiblerrors
+ else
+  cp $file colormap/correct
+ fi 
+ killall display
+done
+
+
+convert 10.1.1.92.1669-Figure-4-mod.png +dither -remap colortable.gif  10.1.1.92.1669-Figure-4-mod-colormap.png
+
+
+for file in *.png
+do
+ echo $file
+ convert $file +dither -remap colortable.gif colormap/${file:0:${#file}-4}-colormap.png;
+done
+
+for index,color in enumerate(colors):
+ print index,color
+
+imdatacopy=deepcopy(imdata)
+for i in range(0,imdatacopy.shape[0]):
+ for j in range(0,imdatacopy.shape[1]): 
+  thiscolors=list(colors[23][1])
+  #print thiscolors, imdata[i][j][0]
+  if imdata[i][j][0]!=thiscolors[0] or imdata[i][j][1]!=thiscolors[1] or imdata[i][j][2]!=thiscolors[2]:
+      imdatacopy[i][j]=[255,255,255]
+
+modim = Image.fromarray(np.uint8(imdatacopy))
+modim.show()
+im.show()
+
+
+# convert an image to HSV
+# threshold on Hue and saturation 
+# 
+
+
+import matplotlib.pyplot as plt
+ঈশ্বর বিশ্বাসী ছিলাম, কিন্তু আর কোনদিন নিজের জন্যে ছাড়া আর কারো জন্যে ভগবানের কিছু চেয়েছি বলে মনে পড়েনা. 
+
+তারপর সত্যিই জানা গেল তার বড় কিছু হয়নি. আজকে মনে হয় প্রার্থনা ফার্থনা বাজে কথা, সবই কাকতালীয়. কিন্তু সে সময় বড় আলাদা ছিল. তাই হয়ত ঘটনাটা হন্ট করে আজও.
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
+x = np.random.normal(0,1,1000)
+numBins = 50
+ax.hist(colorsaturation,numBins,color='green',alpha=0.8)
+#ax.hist(x,numBins,color='green',alpha=0.8)
+plt.show()
+
+
+colorsaturation=[100*x[1] for x in colorshsvscaleddesceding]
+colorsvalue=[100*x[2] for x in colorshsvscaleddesceding]
+print len(colorsaturation),len(colorsvalue)
+
+colorsaturation=[100*x[1] for x in colorshsvscaleddesceding if x[0]>0.0]
+colorsvalue=[100*x[2] for x in colorshsvscaleddesceding if x[0]>0.0]
+print len(colorsaturation),len(colorsvalue)
+
+bins = np.linspace(0, 100, 100)
+plt.hist(colorsaturation, bins, alpha=0.5, label='saturation')
+plt.hist(colorsvalue, bins, alpha=0.5, label='value')
+plt.legend(loc='upper right')
+plt.show()
+
+for item in colorshsvscaleddesceding[0:50]:
+
+
+#low saturation (<17) low value () -> black
+
+import numpy as np
+from PIL import Image
+imagedata=np.zeros((200,200,3))
+palletcolors=[]
+for index,item in enumerate(colorsrgbscaleddesceding[0:100]):
+ print item
+ imagedata[:,:]=[255*item[0],255*item[1],255*item[2]]
+ imPIL=Image.fromarray(np.uint8(imagedata))
+ imPIL.show()
+ response=raw_input("yes/no")
+ if response=="y":
+  palletcolors.append(index)
+
+data=np.zeros((100,700,3)).astype(int)
+for index,item in enumerate(palletcolorcopy):
+ scolor=colorsrgbscaleddesceding[item]
+ color=[255*scolor[0],255*scolor[1],255*scolor[2]]
+ data[:,index*50:(index+1)*50]=color
+
+imPIL=Image.fromarray(np.uint8(data))
+imPIL.show()
+
+palletcolorcopy=palletcolors[0:3]+palletcolors[4:]
+
+
+imdatacopy=deepcopy(imdata)
+for i in range(0,imdatacopy.shape[0]):
+ for j in range(0,imdatacopy.shape[1]): 
+  thiscolors=list(colors[23][1])
+  #print thiscolors, imdata[i][j][0]
+  if imdata[i][j][0]!=thiscolors[0] or imdata[i][j][1]!=thiscolors[1] or imdata[i][j][2]!=thiscolors[2]:
+      imdatacopy[i][j]=[255,255,255]
+
+modim = Image.fromarray(np.uint8(imdatacopy))
+modim.show()
+im.show()
+
+def showImage(imdata,index):
+	imdatacopy=deepcopy(imdata)
+	for i in range(0,imdatacopy.shape[0]):
+		for j in range(0,imdatacopy.shape[1]): 
+			thiscolors=list(colors[index][1])
+			#print thiscolors, imdata[i][j][0]
+			if imdata[i][j][0]!=thiscolors[0] or imdata[i][j][1]!=thiscolors[1] or imdata[i][j][2]!=thiscolors[2]:
+      				imdatacopy[i][j]=[255,255,255]
+	modim = Image.fromarray(np.uint8(imdatacopy))
+	modim.show()
+
+
+##################
+huedict={}show_img(imdata)
+for i in range(0,imagedata.shape[0]):
+ for j in range(0,imagedata.shape[1]):
+  rgbcolor=imagedata[i][j]
+  r=rgbcolor[0]
+  g=rgbcolor[1]
+  b=rgbcolor[2]
+  h,s,v=colorsys.rgb_to_hsv(rgbcolor[0]/255.,rgbcolor[1]/255.,rgbcolor[2]/255.)
+  h=int(360*h)
+  s=int(100*s)
+  v=int(100*v)
+  if v > 5 and s>10:
+   if h in huedict:
+    huedict[h].append(((i,j),(h,s,v),(r,g,b)))
+   else:
+    huedict[h]=[((i,j),(h,s,v),(r,g,b))]
+
+def returnClosestrange(val):
+	coloranges=range(0,360,10)
+	mindif=10000
+	minindex=0
+	for index,item in enumerate(coloranges):
+		dif=abs(item-val)
+		if dif<mindif:
+			mindif=dif
+			minindex=index
+
+	return coloranges[minindex]
+
+modhuedict={}
+for item in huedict.keys():
+ if returnClosestrange(item) in modhuedict:
+  for var in huedict[item]:
+   modhuedict[returnClosestrange(item)].append(var)
+ else:
+  modhuedict[returnClosestrange(item)]=[]
+  for var in huedict[item]:
+   modhuedict[returnClosestrange(item)].append(huedict[item])	
+ 
+#low value, low saturation: black
+#high value, high saturation: Don't know (depends on hue)
+#high value, low saturation: white
+#very low value, high saturation: black
+
+for index,item in enumerate(huedict.keys()):
+ print index,":",item,len(huedict[item])
+
+for index,item in enumerate(huedict.keys()):
+ if len(huedict[item])>1000:
+  print index,":",item,len(huedict[item])
+
+from copy import deepcopy
+imagedatacopy=np.zeros(imagedata.shape)
+imagedatacopy[:,:]=[255,255,255]
+for item in huedict[17]+huedict[18]:
+ i=item[0][0]
+ j=item[0][1]
+ imagedatacopy[i][j]=np.array(list(item[-1]))
+
+modim = Image.fromarray(np.uishow_img(imdata)nt8(imagedatacopy))
+modim.show()
+
+
+for index,item in enumerate(huedict.keys()):
+  if len(huedict[item])>500:
+   print index,":",item,len(huedict[item])
+
+huedict={}
+for item in 
+
+
+
+#####################################
+whiterow=np.empty(imdatacopy.shape[1]).astype('uint8')
+whiterow.fill(255)
+imdatacopy=deepcopy(imdata)
+for i in range(0,imdatacopy.shape[0]):
+	row=imdatacopy[i]
+	if np.array_equal(row,whiterow):
+		print "yes"
+		for j in range(imdatacopy.shape[1]):
+			imdatacopy[i][j]=125
+	
+modim = Image.fromarray(np.uint8(imdatacopy))
+modim.show()
+im.show()
+
+###########################################
+
+############################################
+import os, shutil, json
+fs=os.listdir(os.getcwd())
+for f in fs:
+ jf=json.load(open(f,"r"))
+ imagebb=jf['ImageBB']
+ imagetexts=jf['ImageText']
+ for index,imtext in enumerate(imagetexts):
+  tempbb=imtext['TextBB']
+  tempbb[0]=int((tempbb[0]-imagebb[0])*2)
+  tempbb[1]=int((tempbb[1]-imagebb[1])*2)
+  tempbb[2]=int((tempbb[2]-imagebb[0])*2)
+  tempbb[3]=int((tempbb[3]-imagebb[1])*2)
+  jf['ImageText'][index]['TextBB']=tempbb
+ 
+ newf=open("../modjsons/"+f[:-5]+"-mod.json","w")
+ json.dump(jf,newf)
+ print f 
+ 

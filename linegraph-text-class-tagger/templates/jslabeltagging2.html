@@ -1,0 +1,127 @@
+$def with (jsoncontent,imgloc,imgwidth,imgheight)
+<!DOCTYPE html>
+<head>
+
+<script src="static/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+jQuery("#smallbuttons").click(function () {
+        alert(jQuery(this).attr('name'));
+    });
+
+jQuery("#finalsubmitbuttonwrong").click(function () {
+        mydata={"submitwrong":"submitwrong"}
+        jQuery.ajax({
+        	type: "POST",
+        	url: "/",
+        	data: mydata,
+                dataType: "json",
+    	});
+        window.location.href = window.location.href
+    });
+jQuery("#finalsubmitbutton").click(function () {
+      var goldlabels=new Array();
+        
+	jQuery('textarea').each(function(index){
+		goldlabels.push({name:jQuery(this).attr('name'),value:jQuery(this).val()});
+    	}
+	);
+        
+        mydata=jQuery.param(goldlabels);
+        jQuery.ajax({
+        	type: "POST",
+        	url: "/",
+        	data: mydata,
+                dataType: "json",
+    	});
+        window.location.href = window.location.href
+    });
+});
+</script>
+
+<script type="text/javascript">
+var textBBs=[];
+var allTextsJSON=[];
+function changeText(el) {
+    myclassname=el.className;
+    results=myclassname.split("_");
+    tochangeid="textarea_"+results[2];
+    tochangetext=results[1];
+    document.getElementById(tochangeid).value=tochangetext;	
+}
+function point_it(event){
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+	document.getElementById("cross").style.left = (pos_x-1) ;
+	document.getElementById("cross").style.top = (pos_y-15) ;
+	//document.getElementById("cross").style.visibility = "visible" ;
+	document.pointform.form_x.value = pos_x;
+	document.pointform.form_y.value = pos_y;
+	if (getBoxLoc(pos_x,pos_y)){
+		textindex=getBoxLoc(pos_x,pos_y);
+		var node = document.createElement("li");
+		var input = document.createElement("textarea");
+		input.name = textindex.toString();
+		input.setAttribute("id","textarea_"+textindex.toString());
+		input.cols = "30";
+		input.rows = "1";
+		var inptxt= document.createTextNode(allTextsJSON[textindex].TextLabel);
+		input.appendChild(inptxt);
+		node.appendChild(document.createTextNode("["+allTextsJSON[textindex].TextBB+"]\t"));
+		node.appendChild(document.createTextNode(allTextsJSON[textindex].Text+"\t"));
+		node.appendChild(document.createTextNode(allTextsJSON[textindex].TextLabel+"\t"));
+		node.appendChild(input);
+                var labels=["xaxisvalue","yaxisvalue","xaxislabel","yaxislabel","legend","figurelabel","notclassified"];
+                var allbtntxt="";
+		for (l in labels){
+			//btntxt='<input type="button" name="'+"btn_"+labels[l]+"_"+textindex.toString()+'" Value="'+labels[l]+'>';
+                        //node.innerHTML=node.innerHTML+btntxt;
+			var btn = document.createElement("button"); 
+                        btn.setAttribute('type','button');
+			btn.setAttribute("id", "smallbuttons");
+			btn.className="btn_"+labels[l]+"_"+textindex.toString();
+			var btntxt = document.createTextNode(labels[l]);
+			btn.onclick = function(){
+    				changeText(this);return false;
+  			};
+			btn.appendChild(btntxt);
+			node.appendChild(btn);
+			
+		}
+		//node.innerHTML(node"")
+		document.getElementById("labeltochange").appendChild(node) ;	
+	}
+}
+function populateJSON(){
+	allTextsJSON=$:jsoncontent;
+	for (var i =0; i<allTextsJSON.length; i++ ){
+		textBBs[i]=allTextsJSON[i].TextBB;
+	}
+}
+
+function getBoxLoc(x,y){
+	for (var i =0; i<textBBs.length; i++ ){
+		var thisbb=textBBs[i];
+		if (x>thisbb[0] && x <thisbb[2] && y>thisbb[1] && y <thisbb[3]){
+			var index=i;
+			return index;
+		}
+	}	
+	return Null;
+}
+
+</script>
+</head>
+<body onload="populateJSON()">
+<form name="pointform" method="post">
+<div id="pointer_div" onclick="point_it(event)" style = "background-image:url('static/$imgloc');width:$imgwidth;height:$imgheight;">
+<img src="../static/point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;"></div>
+You pointed on x = <input type="text" name="form_x" size="4" /> - y = <input type="text" name="form_y" size="4" />
+</form>
+<div id="labeltochange"></div>
+<!--form name="myform" method="post" -->
+<div id="submitbuttondiv"><input type="button" name="finalsubmitbutton" id="finalsubmitbutton" Value="Submit" ><input type="button" name="finalsubmitbuttonwrong" id="finalsubmitbuttonwrong" Value="Submit Wrong" ></div> 
+<!-- /form -->
+</body>
+</html>

@@ -1,0 +1,55 @@
+know the type of the text (float/string)
+Y-axis value
+-------------
+heuristics
+----------
+1. If it's towards the left (15% of the width) 
+2. rotation=3
+3. a float/int
+4. number up and number down
+
+X-axis value
+-------------
+heuristics
+----------
+1. If it's towards the bottom (15% from the below) 
+2. rotation=0
+3. a float/int
+4. number left and number right
+
+X-axis label
+------------
+heuristics
+----------
+1. If it's towards the bottom (15% from the below) 
+2. If it's text
+3. numbers on the top
+
+Y-axis label
+------------
+heuristics
+----------
+1. If it's towards the bottom (15% from the below) 
+2. If it's text
+3. numbers on the top
+######################################################
+
+new heuristics
+-------------------
+
+Y axis value: number of equispaced vertical numbers.
+
+X axis value: number of equispaced horizontal numbers.
+
+Y axis label: text to the left of the image, possibly with rotation 3 and there's no text on the left.
+
+X axis label: text to the bottom of the image, horizontal intersection gets atleast 3 boxes nd there's no text below it.
+
+figure label : text to the top of the image, horizontal intersection gets atleast 3 boxes and there's no text above it.
+
+everything else is first undefined.  
+######################################
+
+yaxis label: 1. to the left (there's nothing left to it) and 2. rotation=3
+xaxis lab 
+
